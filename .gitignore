@@ -29,5 +29,5 @@ node_modules
 #Webstorm directory
 .idea
 
-#temp data directory
-#data
+#temp directory
+temp

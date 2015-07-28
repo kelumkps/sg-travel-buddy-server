@@ -4,16 +4,19 @@ var favicon = require('serve-favicon');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var passport = require('passport');
+var session = require('express-session');
+
 var log = require('./libs/log')(module);
 var config = require('./libs/config');
 var ArticleModel = require('./libs/model/api/article');
-var passport = require('passport');
+var userCtrl = require('./libs/controllers/user');
 var oauth2 = require('./libs/auth/oauth2');
 var authConfig = require('./libs/auth/authConfigs');
 var access = authConfig.accessLevels;
 require('./libs/auth/auth');
 require('./libs/db/mongoose');
-var session = require('express-session');
+
 var app = express();
 var publicDir = process.argv[2] || __dirname; //todo remove this
 
@@ -45,6 +48,12 @@ app.post('/oauth2/decision', oauth2.decision);
 app.post('/oauth2/exchange', oauth2.exchange);
 
 app.get('/oauth2/revoke', oauth2.revoke);
+
+app.post('/api/users', userCtrl.createRegularUser);
+
+app.get('/api/users', passport.authenticate('bearer', {session: false}),
+    authConfig.authorize(access.user),
+    userCtrl.getUser);
 
 app.get('/api/userInfo',
     passport.authenticate('bearer', {

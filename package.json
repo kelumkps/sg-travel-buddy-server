@@ -1,0 +1,39 @@
+{
+  "name": "auth-module",
+  "description": "Authentication Module",
+  "version": "1.0.0",
+  "author": {
+    "name": "Kelum Senanayake",
+    "email": "kelumkps@yahoo.com"
+  },
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "connect-flash": "^0.1.1",
+    "crypto": "0.0.3",
+    "express": "^4.12.4",
+    "express-session": "^1.11.3",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.3",
+    "mongoose": "^4.0.5",
+    "morgan": "^1.5.3",
+    "nconf": "^0.7.1",
+    "oauth2orize": "^1.0.1",
+    "passport": "^0.2.2",
+    "passport-http": "^0.2.2",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "passport-oauth2-client-password": "^0.1.2",
+    "serve-favicon": "^2.2.1",
+    "winston": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "htmlparser2": "^3.8.3",
+    "mocha": "^2.2.5",
+    "supertest": "^1.0.1"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --reporter spec test/*.test.js test/**/*.test.js"
+  },
+  "license": "MIT"
+}

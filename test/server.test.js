@@ -23,7 +23,8 @@ describe('Test Auth Server', function () {
         UserModel.remove({}, function (err) {
             var user = new UserModel({
                 username: "andrey",
-                password: "simplepassword"
+                password: "simplepassword",
+                role: "user"
             });
             user.save(function (err, user) {
                 if (err) return log.error(err);

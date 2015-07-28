@@ -9,10 +9,13 @@ var config = require('./libs/config');
 var ArticleModel = require('./libs/model/api/article');
 var passport = require('passport');
 var oauth2 = require('./libs/auth/oauth2');
+var authConfig = require('./libs/auth/authConfigs');
+var access = authConfig.accessLevels;
 require('./libs/auth/auth');
 require('./libs/db/mongoose');
 var session = require('express-session');
 var app = express();
+var publicDir = process.argv[2] || __dirname; //todo remove this
 
 app.use(favicon(__dirname + '/public/favicon.ico')); // use standard favicon
 app.set('views', __dirname + '/views');
@@ -27,7 +30,7 @@ app.use(require('connect-flash')());
 app.use(session({secret: 'SECRET'})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(express.static(path.join(__dirname, "public"))); // starting static file server, that will watch `public` folder (in our case there will be `index.html`)
+app.use(express.static(path.join(publicDir, "public"))); // starting static file server, that will watch `public` folder (in our case there will be `index.html`)
 
 app.get('/api', function (req, res) {
     res.send('API is running');
@@ -47,6 +50,7 @@ app.get('/api/userInfo',
     passport.authenticate('bearer', {
         session: false
     }),
+    authConfig.authorize(access.user),
     function (req, res) {
         // req.authInfo is set using the `info` argument supplied by
         // `BearerStrategy`.  It is typically used to indicate a scope of the token,

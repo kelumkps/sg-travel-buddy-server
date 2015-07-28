@@ -1,5 +1,5 @@
 {
-  "port": 1337,
+  "port": 8080,
   "logger": {
     "format": "dev",
     "level": {
@@ -8,7 +8,7 @@
     }
   },
   "mongoose": {
-    "uri": "mongodb://localhost/authmodule"
+    "uri": "mongodb://localhost/sgtravel"
   },
   "security": {
     "tokenLife": 3600,

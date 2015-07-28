@@ -17,6 +17,10 @@ var User = new Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        required: true
+    },
     created: {
         type: Date,
         default: Date.now

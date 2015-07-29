@@ -4,6 +4,7 @@ var log = require('./../log')(module);
 module.exports = {
     createRegularUser: function (req, res) {
         var user = new UserModel({
+            name: req.body.name,
             username: req.body.username,
             password: req.body.password,
             role: "user"
@@ -14,11 +15,12 @@ module.exports = {
                 log.info("A New regular user created", user.username);
                 res.statusCode = 201;
                 return res.send({
+                    name: user.name,
                     username: user.username,
                     role: user.role
                 });
             } else {
-                if (err.code == 11000) res.send(409, 'Conflict: Duplicate Resource');
+                if (err.code == 11000) res.send(409, 'user_already_exist_error');
                 else if (err.name == 'ValidationError') res.send(400, 'Validation error');
                 else res.send(500, 'Internal Server error');
 
@@ -32,8 +34,9 @@ module.exports = {
             UserModel.findById(req.user.userId, function (err, user) {
                 if (err) return res.send(500, 'Internal Server Error');
                 if (!user) return res.send(404, 'Not found');
-                res.statusCode = 201;
+                res.statusCode = 200;
                 return res.send({
+                    name: user.name,
                     username: user.username,
                     role: user.role
                 });

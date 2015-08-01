@@ -80,7 +80,7 @@ var busServiceFunc = function (callback) {
                 var busService;
                 if (bus.routeTwoStops == undefined) {
                     busService = new BusService({
-                        number: bus.number,
+                        _id: bus._id,
                         routes: bus.routes,
                         type: bus.type,
                         operator: bus.operator,
@@ -89,7 +89,7 @@ var busServiceFunc = function (callback) {
                     });
                 } else {
                     busService = new BusService({
-                        number: bus.number,
+                        _id: bus._id,
                         routes: bus.routes,
                         type: bus.type,
                         operator: bus.operator,
@@ -122,7 +122,7 @@ var busStopFunc = function (callback) {
             if (line != undefined && line.length > 0) {
                 var stop = JSON.parse(line);
                 var busStop = new BusStop({
-                    number: stop.number,
+                    _id: stop._id,
                     name: stop.name,
                     location: {
                         type: stop.location.type,

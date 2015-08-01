@@ -3,9 +3,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var BusService = new Schema({
-    number: {
+    _id: {
         type: String,
-        unique: true,
         required: true
     },
     routes: {

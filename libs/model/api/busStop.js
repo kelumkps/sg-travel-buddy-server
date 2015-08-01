@@ -3,14 +3,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var BusStop = new Schema({
-    number: {
+    _id: {
         type: String,
-        unique: true,
         required: true
     },
     name: {
         type: String,
-        required: true
+        required: true,
+        index: true
     },
     location: {
         type: {

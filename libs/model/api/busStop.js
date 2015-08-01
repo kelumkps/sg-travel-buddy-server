@@ -22,6 +22,6 @@ var BusStop = new Schema({
     busServices: [String]
 });
 
-BusStop.index({ location : '2dsphere' });
+BusStop.index({location: '2dsphere'});
 
 module.exports = mongoose.model('BusStop', BusStop);

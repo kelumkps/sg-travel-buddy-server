@@ -163,7 +163,7 @@ async.series([
         timeOutFun
     ],
     function (err, results) {
-        if(err) log.error(err);
+        if (err) log.error(err);
         log.info('Finished executing all tasks', results);
         process.exit();
     });

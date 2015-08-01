@@ -23,5 +23,6 @@ var BusStop = new Schema({
 });
 
 BusStop.index({location: '2dsphere'});
+BusStop.index({_id: 'text', name: 'text'});
 
 module.exports = mongoose.model('BusStop', BusStop);

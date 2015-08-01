@@ -11,6 +11,7 @@ var log = require('./libs/log')(module);
 var config = require('./libs/config');
 var ArticleModel = require('./libs/model/api/article');
 var userCtrl = require('./libs/controllers/user');
+var busServiceCtrl = require('./libs/controllers/busService');
 var oauth2 = require('./libs/auth/oauth2');
 var authConfig = require('./libs/auth/authConfigs');
 var access = authConfig.accessLevels;
@@ -54,6 +55,12 @@ app.post('/api/users', userCtrl.createRegularUser);
 app.get('/api/users', passport.authenticate('bearer', {session: false}),
     authConfig.authorize(access.user),
     userCtrl.getUser);
+
+app.get('/api/buses', busServiceCtrl.getBuses);
+app.get('/api/buses/:id', busServiceCtrl.getBusById);
+app.get('/api/stops', busServiceCtrl.getBusStops);
+app.get('/api/stops/:id', busServiceCtrl.getBusStopsById);
+
 
 app.get('/api/userInfo',
     passport.authenticate('bearer', {

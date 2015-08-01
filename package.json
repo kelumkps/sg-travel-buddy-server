@@ -7,6 +7,7 @@
     "email": "kelumkps@yahoo.com"
   },
   "dependencies": {
+    "async": "^1.4.0",
     "body-parser": "^1.12.4",
     "connect-flash": "^0.1.1",
     "crypto": "0.0.3",

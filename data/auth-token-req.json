@@ -1,0 +1,7 @@
+{
+  "grant_type": "password",
+  "client_id": "sg-travel-buddy-v1",
+  "client_secret": "welcome1",
+  "username": "user@me.com",
+  "password": "password"
+}

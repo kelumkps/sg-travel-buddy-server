@@ -58,6 +58,7 @@ app.get('/api/users', passport.authenticate('bearer', {session: false}),
 
 app.get('/api/buses', busServiceCtrl.getBuses);
 app.get('/api/buses/:id', busServiceCtrl.getBusById);
+app.get('/api/buses/:id/stops', busServiceCtrl.getBusStopsByBusId);
 app.get('/api/stops', busServiceCtrl.getBusStops);
 app.get('/api/stops/:id', busServiceCtrl.getBusStopsById);
 

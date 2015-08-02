@@ -63,40 +63,6 @@ module.exports = {
             }
             return res.send(stop);
         })
-    },
-    getBusStopsByBusId: function (req, res) {
-        var fields = req.query.fields || "";
-        var busId = req.params.id;
-        BusModel.findById(busId, function (err, bus) {
-            if (err) return sendServerErrorResponse(res, err);
-            if (!bus) {
-                res.statusCode = 404;
-                return res.send({
-                    error: 'Bus Id is not found'
-                });
-            }
-            BusStopModel.find({'_id': {$in: bus.routeOneStops}}, fields.split(',').join(' '), function (err, stops) {
-                if (err) return sendServerErrorResponse(res, err);
-
-                var result = {
-                    "_id": bus._id,
-                    "routes": bus.routes,
-                    "type": bus.type,
-                    "operator": bus.operator,
-                    "name": bus.name,
-                    "routeOneStops": stops
-                };
-                if (bus.routes == 2) {
-                    BusStopModel.find({'_id': {$in: bus.routeTwoStops}}, fields.split(',').join(' '), function (err, stops) {
-                        if (err) return sendServerErrorResponse(res, err);
-                        result['routeTwoStops'] = stops;
-                        return res.send(result);
-                    });
-                } else {
-                    return res.send(result);
-                }
-            });
-        })
     }
 };
 

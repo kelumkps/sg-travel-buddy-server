@@ -23,8 +23,16 @@ var BusService = new Schema({
         type: String,
         required: true
     },
-    routeOneStops: [String],
-    routeTwoStops: [String]
+    routeOneStops: [{
+        number: String,
+        name: String,
+        _id: false
+    }],
+    routeTwoStops: [{
+        number: String,
+        name: String,
+        _id: false
+    }]
 });
 
 module.exports = mongoose.model('BusService', BusService);

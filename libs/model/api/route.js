@@ -11,10 +11,14 @@ var Route = new Schema({
         coordinates: [Schema.Types.Mixed]
     },
     busStops: [String],
+    distanceLimit: {
+        type: Number,
+        default: 500
+    },
     userId: {
-    	type: String,
-    	index: true
- 	},
+        type: String,
+        index: true
+    },
     created: {
         type: Date,
         default: Date.now

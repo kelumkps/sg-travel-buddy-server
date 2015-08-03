@@ -20,6 +20,12 @@ require('./libs/auth/auth');
 require('./libs/db/mongoose');
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+
+// Socket.io Communication
+io.sockets.on('connection', require('./libs/controllers/socket'));
+
 var publicDir = process.argv[2] || __dirname; //todo remove this
 
 app.use(favicon(__dirname + '/public/favicon.ico')); // use standard favicon
@@ -239,7 +245,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
-
-app.listen(config.get('port'), function () {
+server.listen(config.get('port'), function () {
     log.info('Express server listening on port ' + config.get('port'));
 });
+

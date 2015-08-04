@@ -28,7 +28,7 @@ module.exports = {
         if (route.coordinates) {
             routeService.findRouteById(route._id, 'distanceLimit', function (err, rt) {
                 if (err) return sendServerErrorResponse(res, err);
-                if (!rt) return res.(404, {error: 'Not found'});
+                if (!rt) return res.send(404, {error: 'Not found'});
                 var query = {};
                 query.location = {
                     $near: {

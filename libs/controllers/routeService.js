@@ -25,7 +25,7 @@ module.exports = {
         if (update.$push || update.$set) {
             RouteModel.update(conditions, update, options, callback);
         } else {
-            RouteModel.findById(route._id, callback);
+            RouteModel.findById(route._id, '_id', callback);
         }
     },
     findRouteById: function (id, fields, callback) {

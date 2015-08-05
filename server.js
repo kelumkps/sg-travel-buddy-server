@@ -23,6 +23,10 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
+
+var serverPort = process.env.OPENSHIFT_NODEJS_PORT || config.get('port');
+var serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 // Socket.io Communication
 io.sockets.on('connection', require('./libs/controllers/socket'));
 
@@ -245,7 +249,8 @@ app.use(function (err, req, res, next) {
     });
 });
 
-server.listen(config.get('port'), function () {
-    log.info('Express server listening on port ' + config.get('port'));
+server.listen(serverPort, serverIpAddress, function () {
+    log.info('%s: SGTravelBuddy server started on %s:%d ...',
+                        Date(Date.now() ), serverIpAddress, serverPort);
 });
 

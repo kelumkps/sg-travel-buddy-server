@@ -37,5 +37,6 @@
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec test/*.test.js test/**/*.test.js"
   },
+  "main": "server.js",
   "license": "MIT"
 }

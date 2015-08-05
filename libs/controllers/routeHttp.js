@@ -1,12 +1,16 @@
 var routeService = require('./routeService');
 var BusStopModel = require('./../model/api/busStop');
 var log = require('./../log')(module);
+var config = require('./../config');
+var maxArrayLimit = config.get('mongoose:maxArrayLimit');
 
 module.exports = {
     createRoute: function (req, res) {
         log.info('Start creating a new route');
         if (!req.body.coordinates) return res.send(400, {error: "Bad Request", message: "Missing Coordinates"});
-
+        if (req.body.coordinates.length >= maxArrayLimit) {
+            return res.send(422, {error: 'Unprocessable Entity : Limit is exceeded'});
+        }
         var route = {
             coordinates: req.body.coordinates
         };
@@ -26,9 +30,13 @@ module.exports = {
         if (req.body.coordinates) route['coordinates'] = req.body.coordinates;
 
         if (route.coordinates) {
-            routeService.findRouteById(route._id, 'distanceLimit', function (err, rt) {
+            routeService.findRouteById(route._id, 'distanceLimit path', function (err, rt) {
                 if (err) return sendServerErrorResponse(res, err);
                 if (!rt) return res.send(404, {error: 'Not found'});
+                if (rt.path.coordinates.length >= maxArrayLimit) {
+                    return res.send(422, {error: 'Unprocessable Entity : Limit is exceeded'});
+                }
+
                 var query = {};
                 query.location = {
                     $near: {

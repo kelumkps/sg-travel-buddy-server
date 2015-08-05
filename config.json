@@ -8,7 +8,8 @@
     }
   },
   "mongoose": {
-    "uri": "mongodb://localhost/sgtravel"
+    "uri": "mongodb://localhost/sgtravel",
+    "maxArrayLimit": 7500
   },
   "security": {
     "tokenLife": 3600,

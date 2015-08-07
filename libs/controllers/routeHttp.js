@@ -47,7 +47,7 @@ module.exports = {
                         $maxDistance: rt.distanceLimit
                     }
                 };
-                BusStopModel.find(query, "_id", {sort: "_id"}, function (err, stops) {
+                BusStopModel.find(query, "_id name", {sort: "_id"}, function (err, stops) {
                     if (err) return sendServerErrorResponse(res, err);
                     if (!stops) stops = [];
                     res.send(200, stops);

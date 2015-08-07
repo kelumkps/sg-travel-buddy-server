@@ -251,6 +251,6 @@ app.use(function (err, req, res, next) {
 
 server.listen(serverPort, serverIpAddress, function () {
     log.info('%s: SGTravelBuddy server started on %s:%d ...',
-                        Date(Date.now() ), serverIpAddress, serverPort);
+        Date(Date.now()), serverIpAddress, serverPort);
 });
 

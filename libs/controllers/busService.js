@@ -44,6 +44,9 @@ module.exports = {
         var conditions = {};
         var search = req.query.q;
         if (search != undefined && search != "") {
+            if (search.indexOf(' ') > 0) {
+                search = '\"' + search + '\"';
+            }
             conditions = {$text: {$search: search}};
         }
         BusStopModel.find(conditions, fields.split(',').join(' '), options, function (err, stops) {

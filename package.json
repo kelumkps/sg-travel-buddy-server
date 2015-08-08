@@ -16,6 +16,7 @@
     "jade": "^1.11.0",
     "method-override": "^2.3.3",
     "mongoose": "^4.0.5",
+    "mongoose-text-search": "0.0.2",
     "morgan": "^1.5.3",
     "nconf": "^0.7.1",
     "oauth2orize": "^1.0.1",

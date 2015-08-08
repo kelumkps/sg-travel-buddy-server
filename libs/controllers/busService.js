@@ -47,12 +47,22 @@ module.exports = {
             if (search.indexOf(' ') > 0) {
                 search = '\"' + search + '\"';
             }
-            conditions = {$text: {$search: search}};
+            options['project'] = fields.split(',').join(' ');
+            BusStopModel.textSearch(search, options, function (err, output) {
+                if (err) return sendServerErrorResponse(res, err);
+                var results = output.results;
+                var response = [];
+                results.forEach(function (stop) {
+                    response.push(stop.obj);
+                });
+                return res.send(response);
+            });
+        } else {
+            BusStopModel.find(conditions, fields.split(',').join(' '), options, function (err, stops) {
+                if (err) return sendServerErrorResponse(res, err);
+                return res.send(stops);
+            });
         }
-        BusStopModel.find(conditions, fields.split(',').join(' '), options, function (err, stops) {
-            if (err) return sendServerErrorResponse(res, err);
-            return res.send(stops);
-        });
     },
     getBusStopsById: function (req, res) {
         var fields = req.query.fields || "";

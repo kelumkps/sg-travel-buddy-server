@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var textSearch = require('mongoose-text-search');
 
 var Schema = mongoose.Schema;
 
@@ -21,6 +22,8 @@ var BusStop = new Schema({
     },
     busServices: [String]
 });
+
+BusStop.plugin(textSearch);
 
 BusStop.index({location: '2dsphere'});
 BusStop.index({_id: 'text', name: 'text'});

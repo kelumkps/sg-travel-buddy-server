@@ -12,6 +12,7 @@ var config = require('./libs/config');
 var userCtrl = require('./libs/controllers/user');
 var busServiceCtrl = require('./libs/controllers/busService');
 var routeHttpCtrl = require('./libs/controllers/routeHttp');
+var pingCtrl = require('./libs/controllers/ping');
 var oauth2 = require('./libs/auth/oauth2');
 var authConfig = require('./libs/auth/authConfigs');
 var access = authConfig.accessLevels;
@@ -73,6 +74,10 @@ app.get('/api/stops/:id', busServiceCtrl.getBusStopsById);
 
 app.post('/api/routes', routeHttpCtrl.createRoute);
 app.put('/api/routes/:id', routeHttpCtrl.updateRoute);
+
+app.get('/api/pings', pingCtrl.getPings);
+app.post('/api/pings', pingCtrl.createPing);
+app.delete('/api/pings', pingCtrl.deletePings);
 
 app.get('/api/userInfo',
     passport.authenticate('bearer', {

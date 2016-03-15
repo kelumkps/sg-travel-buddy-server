@@ -14,5 +14,9 @@
   "security": {
     "tokenLife": 3600,
     "grantCodeLife": 600
+  },
+  "analytics": {
+    "gaAccountId": "UA-XXXX-XX",
+    "serverUrl": "https://sg-travelbuddy.rhcloud.com/"
   }
 }

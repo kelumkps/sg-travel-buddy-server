@@ -14,6 +14,7 @@ var busServiceCtrl = require('./libs/controllers/busService');
 var routeHttpCtrl = require('./libs/controllers/routeHttp');
 var pingCtrl = require('./libs/controllers/ping');
 var deviceInfoCtrl = require('./libs/controllers/deviceInfo');
+var analyticsCtrl = require('./libs/controllers/analytics');
 var oauth2 = require('./libs/auth/oauth2');
 var authConfig = require('./libs/auth/authConfigs');
 var access = authConfig.accessLevels;
@@ -52,6 +53,14 @@ app.get('/api', function (req, res) {
     res.send('API is running');
 });
 
+app.get('/api/pings', pingCtrl.getPings);
+
+app.post('/api/pings', pingCtrl.createPing);
+
+app.delete('/api/pings', pingCtrl.deletePings);
+
+app.use(analyticsCtrl.pageView);
+
 app.post('/oauth2/token', oauth2.token);
 
 app.get('/oauth2/auth', oauth2.authorization);
@@ -69,16 +78,16 @@ app.get('/api/users', passport.authenticate('bearer', {session: false}),
     userCtrl.getUser);
 
 app.get('/api/buses', busServiceCtrl.getBuses);
+
 app.get('/api/buses/:id', busServiceCtrl.getBusById);
+
 app.get('/api/stops', busServiceCtrl.getBusStops);
+
 app.get('/api/stops/:id', busServiceCtrl.getBusStopsById);
 
 app.post('/api/routes', routeHttpCtrl.createRoute);
-app.put('/api/routes/:id', routeHttpCtrl.updateRoute);
 
-app.get('/api/pings', pingCtrl.getPings);
-app.post('/api/pings', pingCtrl.createPing);
-app.delete('/api/pings', pingCtrl.deletePings);
+app.put('/api/routes/:id', routeHttpCtrl.updateRoute);
 
 app.post('/api/deviceInfo', deviceInfoCtrl.createOrUpdate);
 

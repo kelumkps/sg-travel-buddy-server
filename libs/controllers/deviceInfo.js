@@ -29,6 +29,7 @@ module.exports = {
                         if (!notification.isRead) {
                             response.notifications.push(notification);
                             notification.isRead = true;
+                            break;
                         }
                     }
                     if (response.notifications.length > 0) {

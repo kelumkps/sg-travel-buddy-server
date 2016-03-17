@@ -7,10 +7,12 @@ var DeviceInfo = new Schema({
     serial: {type: String, unique: true, required: true},
     platform: String,
     model: String,
+    manufacturer: String,
     osVersion: String,
     appVersion: String,
     cordova: String,
     isVirtual: Boolean,
+    onlineCount: Number,
     notifications: [{
         header: String,
         body: String,

@@ -34,7 +34,6 @@ module.exports = {
         var deviceId = req.get('device-id');
         if (deviceId != undefined) {
             visitor = ua(gaAccountId, deviceId, {strictCidFormat: false, https: true});
-
             DeviceInfoModel.findById(deviceId, function (err, deviceInfo) {
                 if (err) {
                     visitor.pageview(pageData).send();

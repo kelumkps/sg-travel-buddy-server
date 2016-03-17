@@ -9,17 +9,17 @@ module.exports = {
             serial: req.body.serial,
             platform: req.body.platform,
             model: req.body.model,
+            manufacturer: req.body.manufacturer,
             osVersion: req.body.osVersion,
             appVersion: req.body.appVersion,
             cordova: req.body.cordova,
-            isVirtual: req.body.isVirtual,
-            updated: Date.now()
+            isVirtual: req.body.isVirtual
         };
         log.info('Create or update device information', deviceInfo);
         if (req.body.uuid && req.body.serial) {
             var conditions = {uuid: req.body.uuid, serial: req.body.serial},
                 options = {upsert: true, new: true};
-
+            deviceInfo['$inc'] =  {onlineCount: 1};
             DeviceInfoModel.findOneAndUpdate(conditions, deviceInfo, options, function (err, info) {
                 if (err) return sendServerErrorResponse(res, err);
                 var response = {_id: info._id, notifications: []};

@@ -18,5 +18,14 @@
   "analytics": {
     "gaAccountId": "UA-XXXX-XX",
     "serverUrl": "https://sg-travelbuddy.rhcloud.com/"
+  },
+  "mailer": {
+    "user": "mail@email.com",
+    "defaultFromAddress": "'Team-SGTravelBuddy' <mail@email.com>",
+    "clientId": "#client-id#",
+    "clientSecret": "#client-secret#",
+    "refreshToken": "#refresh-token#",
+    "accessToken": "#access-token#",
+    "timeout": 3600
   }
 }

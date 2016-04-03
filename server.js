@@ -6,10 +6,12 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var passport = require('passport');
 var session = require('express-session');
+var sass = require('node-sass-middleware');
 
 var log = require('./libs/log')(module);
 var config = require('./libs/config');
 var userCtrl = require('./libs/controllers/user');
+var passwordRecoveryCtrl = require('./libs/controllers/passwordRecovery');
 var busServiceCtrl = require('./libs/controllers/busService');
 var routeHttpCtrl = require('./libs/controllers/routeHttp');
 var pingCtrl = require('./libs/controllers/ping');
@@ -37,13 +39,18 @@ var publicDir = process.argv[2] || __dirname; //todo remove this
 app.use(favicon(__dirname + '/public/favicon.ico')); // use standard favicon
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+app.use(sass({
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'public'),
+    sourceMap: true
+}));
 app.use(morgan(config.get('logger:format'))); // log every request to the console
 app.use(bodyParser.urlencoded({
     extended: false
 })); // parse application/x-www-form-urlencoded  
 app.use(bodyParser.json()); // parse application/json 
 app.use(methodOverride()); // simulate DELETE and PUT
-app.use(require('connect-flash')());
+app.use(require('express-flash')());
 app.use(session({secret: 'SECRET'})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -76,6 +83,10 @@ app.post('/api/users', userCtrl.createRegularUser);
 app.get('/api/users', passport.authenticate('bearer', {session: false}),
     authConfig.authorize(access.user),
     userCtrl.getUser);
+
+app.post('/password_reset', passwordRecoveryCtrl.passwordReset);
+app.get('/password_reset/:token', passwordRecoveryCtrl.passwordRestCheck);
+app.post('/password_reset/:token', passwordRecoveryCtrl.updatePassword);
 
 app.get('/api/buses', busServiceCtrl.getBuses);
 

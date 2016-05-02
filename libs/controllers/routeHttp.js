@@ -9,13 +9,14 @@ module.exports = {
         log.info('Start creating a new route');
         if (!req.body.coordinates) return res.send(400, {error: "Bad Request", message: "Missing Coordinates"});
         if (req.body.coordinates.length >= maxArrayLimit) {
-            return res.send(422, {error: 'Unprocessable Entity : Limit is exceeded'});
+            return res.send(422, {error: 'Un processable Entity : Limit is exceeded'});
         }
         var route = {
             coordinates: req.body.coordinates
         };
         if (req.user) route['userId'] = req.user.userId;
         if (req.body.busStops) route['busStops'] = req.body.busStops;
+        if (req.body.distanceLimit) route['distanceLimit'] = req.body.distanceLimit;
 
         routeService.createRoute(route, function (err, route) {
             if (err) return sendServerErrorResponse(res, err);
@@ -34,7 +35,7 @@ module.exports = {
                 if (err) return sendServerErrorResponse(res, err);
                 if (!rt) return res.send(404, {error: 'Not found'});
                 if (rt.path.coordinates.length >= maxArrayLimit) {
-                    return res.send(422, {error: 'Unprocessable Entity : Limit is exceeded'});
+                    return res.send(422, {error: 'Un processable Entity : Limit is exceeded'});
                 }
 
                 var query = {};

@@ -84,6 +84,10 @@ app.get('/api/users', passport.authenticate('bearer', {session: false}),
     authConfig.authorize(access.user),
     userCtrl.getUser);
 
+app.put('/api/users', passport.authenticate('bearer', {session: false}),
+    authConfig.authorize(access.user),
+    userCtrl.updateUser);
+
 app.post('/password_reset', passwordRecoveryCtrl.passwordReset);
 app.get('/password_reset/:token', passwordRecoveryCtrl.passwordRestCheck);
 app.post('/password_reset/:token', passwordRecoveryCtrl.updatePassword);

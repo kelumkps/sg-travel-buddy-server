@@ -13,6 +13,10 @@ var User = new Schema({
         type: String,
         required: true
     },
+    distance: {
+        type: Number,
+        default: 500
+    },
     hashedPassword: {
         type: String,
         required: true

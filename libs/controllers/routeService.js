@@ -11,6 +11,7 @@ module.exports = {
         };
         if (route.busStops) routeContent['busStops'] = route.busStops;
         if (route.userId) routeContent['userId'] = route.userId;
+        if (route.distanceLimit) routeContent['distanceLimit'] = route.distanceLimit;
 
         var routeModel = new RouteModel(routeContent);
         routeModel.save(callback);

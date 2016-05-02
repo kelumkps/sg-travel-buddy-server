@@ -7,7 +7,8 @@ module.exports = {
             name: req.body.name,
             username: req.body.username,
             password: req.body.password,
-            role: "user"
+            role: "user",
+            distance: 500
         });
 
         user.save(function (err) {
@@ -17,7 +18,8 @@ module.exports = {
                 return res.send({
                     name: user.name,
                     username: user.username,
-                    role: user.role
+                    role: user.role,
+                    distance: user.distance
                 });
             } else {
                 if (err.code == 11000) res.send(409, 'user_already_exist_error');
@@ -38,11 +40,42 @@ module.exports = {
                 return res.send({
                     name: user.name,
                     username: user.username,
-                    role: user.role
+                    role: user.role,
+                    distance: user.distance
                 });
             });
         } else {
             res.send(404, 'Not found');
+        }
+    },
+    updateUser: function (req, res) {
+        if (req.user) {
+            log.info('Update user profile');
+            UserModel.findById(req.user.userId, function (err, user) {
+                if (err) return res.send(500, 'Internal Server Error');
+                if (!user) return res.send(404, 'User Not found');
+
+                if (req.body.currentPassword) {
+                    var currentPassword = req.body.currentPassword;
+                    if (!user.checkPassword(currentPassword)) {
+                        return res.send(404, 'User Not found');
+                    }
+                }
+
+                if (req.body.newPassword) user.password = req.body.newPassword;
+                if (req.body.name) user.name = req.body.name;
+                if (req.body.distance) user.distance = req.body.distance;
+                user.save(function (err) {
+                    if (err) {
+                        return res.send(500, 'Internal Server Error');
+                    }
+                    res.statusCode = 200;
+                    return res.send({
+                        name: user.name,
+                        distance: user.distance
+                    });
+                });
+            });
         }
     }
 };

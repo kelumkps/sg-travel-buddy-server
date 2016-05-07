@@ -1,0 +1,71 @@
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    title Welcome to #{productName}, #{name}!
+    style(type='text/css', rel='stylesheet', media='all').
+      *:not(br):not(tr):not(html) {font-family:Arial, "Helvetica Neue", Helvetica, sans-serif;-webkit-box-sizing:border-box;box-sizing:border-box}
+      @media only screen and (max-width: 600px) {
+      .email-body_inner, .email-footer {
+      width: 100%
+      }
+      }
+      @media only screen and (max-width: 500px) {
+      .button {
+      width: 100%
+      }
+      }
+  body(style='-webkit-text-size-adjust:none; background-color:#F2F4F6; color:#74787E; height:100%; line-height:1.4; margin:0; width:100%', bgcolor='#F2F4F6', height='100%', width='100%')
+    table(width='100%', cellpadding='0', cellspacing='0', style='background-color:#F2F4F6; margin:0; padding:0; width:100%', bgcolor='#F2F4F6')
+      tr
+        td(align='center')
+          table(width='100%', cellpadding='0', cellspacing='0', style='margin:0; padding:0; width:100%')
+            // Logo
+            tr
+              td(style='padding:25px 0; text-align:center', align='center')
+                a(style='color:#bbbfc3; font-size:16px; font-weight:bold; text-decoration:none; text-shadow:0 1px 0 white') #{productName}
+            // Email Body
+            tr
+              td(width='100%', style='background-color:#FFF; border-bottom:1px solid #EDEFF2; border-top:1px solid #EDEFF2; margin:0; padding:0; width:100%', bgcolor='#FFFFFF')
+                table(align='center', width='570', cellpadding='0', cellspacing='0', style='margin:0 auto; padding:0; width:570px')
+                  // Body content
+                  tr
+                    td(style='padding:35px')
+                      h1(style='color:#2F3133; font-size:19px; font-weight:bold; margin-top:0; text-align:left', align='left') Hi #{name},
+                      p(style='color:#74787E; font-size:16px; line-height:1.5em; margin-top:0; text-align:left', align='left')
+                        | Thanks for signing up for 
+                        strong #{productName}
+                        | . We’re very excited to have you on
+                        |                                         board.
+                      p(style='color:#74787E; font-size:16px; line-height:1.5em; margin-top:0; text-align:left', align='left')
+                        | For your reference, your username is 
+                        strong #{email}
+                        |  for logging
+                        |                                         in.
+                      p(style='color:#74787E; font-size:16px; line-height:1.5em; margin-top:0; text-align:left', align='left')
+                        | Need help getting started? Check out our help documentation.
+                        | Or, just reply to this email with any questions or issues you
+                        | have. The #{productName} support team is always excited to help you.
+                      p(style='color:#74787E; font-size:16px; line-height:1.5em; margin-top:0; text-align:left', align='left')
+                        | Thanks,
+                        br
+                        | The #{productName} Team
+                      p(style='color:#74787E; font-size:16px; line-height:1.5em; margin-top:0; text-align:left', align='left')
+                        strong P.S.
+                        |  If you did not register with #{productName},
+                        |                                         just reply to this email and let us know.
+                      // Sub copy
+            tr
+              td
+                table(align='center', width='570', cellpadding='0', cellspacing='0', style='margin:0 auto; padding:0; text-align:center; width:570px')
+                  tr
+                    td(style='padding:35px')
+                      p(style='color:#AEAEAE; font-size:12px; line-height:1.5em; margin-top:0; text-align:center', align='center')
+                        | © 2016 
+                        a(href='#{siteURL}', style='color:#3869D4') #{productName}
+                        | . All rights reserved.
+                      p(style='color:#AEAEAE; font-size:12px; line-height:1.5em; margin-top:0; text-align:center', align='center')
+                        br
+                        a(target='_blank', title='Follow @SGTravelBuddy on Twitter', href='https://twitter.com/intent/user?screen_name=SGTravelBuddy', style='color:#3869D4')
+                          i
+                          span @SGTravelBuddy

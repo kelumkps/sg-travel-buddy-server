@@ -1,5 +1,6 @@
 var UserModel = require('./../model/auth/user');
 var log = require('./../log')(module);
+var mailer = require('./emailService');
 
 module.exports = {
     createRegularUser: function (req, res) {
@@ -15,6 +16,23 @@ module.exports = {
             if (!err) {
                 log.info("A New regular user created", user.username);
                 res.statusCode = 201;
+                var siteURL = 'https://' + req.hostname;
+                var locals = {
+                    subject: 'Welcome to SG Travel Buddy',
+                    email: user.username,
+                    name: user.name || user.username,
+                    siteURL: siteURL,
+                    productName: 'SG Travel Buddy',
+                    twitterIconUrl: siteURL + '/images/twitter-icon.png',
+                    twitterHandler: 'SGTravelBuddy'
+                };
+                mailer.sendOne('welcome', locals, function (err, respMs, html, text) {
+                    if (err) {
+                        log.error("Error while sending welcome email", user.username, err);
+                    }
+                    log.info('Welcome email sent to new user', user.username);
+                });
+
                 return res.send({
                     name: user.name,
                     username: user.username,

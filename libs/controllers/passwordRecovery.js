@@ -31,7 +31,7 @@ module.exports = {
                     } else return res.status(500).send('Internal Server Error');
                 }
                 UserTokenModel.new(user.userId, function (err, token) {
-                    var siteURL = req.protocol + '://' + req.hostname;
+                    var siteURL = 'https://' + req.hostname;
                     var resetUrl = siteURL + '/password_reset/' + token.token;
                     var locals = {
                         subject: 'SG Travel Buddy : Recover Your Password',

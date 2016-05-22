@@ -52,7 +52,7 @@ module.exports = {
                 }
             });
         } else {
-            visitor = ua(gaAccountId, {https: true});
+            visitor = ua(gaAccountId, "Web-Client", {strictCidFormat: false, https: true});
             visitor.pageview(pageData).send();
         }
         next();

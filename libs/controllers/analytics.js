@@ -27,12 +27,17 @@ module.exports = {
             dp: req.path,
             dh: serverUrl,
             uip: req.ip,
-            ua: req.headers['user-agent']
+            ua: req.headers["user-agent"],
+            ds: "web",
+            ul: req.headers["accept-language"]
         };
         pageData['dt'] = getPageTitle(req.path);
         var visitor;
         var deviceId = req.get('device-id');
         if (deviceId != undefined) {
+            pageData['ds'] = 'app';
+            pageData['cid'] = deviceId;
+            pageData['uid'] = deviceId;
             visitor = ua(gaAccountId, deviceId, {strictCidFormat: false, https: true});
             DeviceInfoModel.findById(deviceId, function (err, deviceInfo) {
                 if (err) {

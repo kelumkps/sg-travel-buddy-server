@@ -19,9 +19,12 @@ var BusService = new Schema({
         type: String,
         required: true
     },
-    name: {
+    routeOneName: {
         type: String,
         required: true
+    },
+    routeTwoName: {
+        type: String
     },
     routeOneStops: [{
         number: String,

@@ -12,6 +12,7 @@ var log = require('./libs/log')(module);
 var config = require('./libs/config');
 var userCtrl = require('./libs/controllers/user');
 var passwordRecoveryCtrl = require('./libs/controllers/passwordRecovery');
+var syncService = require('./libs/controllers/transportSyncService');
 var busServiceCtrl = require('./libs/controllers/busService');
 var routeHttpCtrl = require('./libs/controllers/routeHttp');
 var pingCtrl = require('./libs/controllers/ping');
@@ -91,6 +92,10 @@ app.put('/api/users', passport.authenticate('bearer', {session: false}),
 app.post('/password_reset', passwordRecoveryCtrl.passwordReset);
 app.get('/password_reset/:token', passwordRecoveryCtrl.passwordRestCheck);
 app.post('/password_reset/:token', passwordRecoveryCtrl.updatePassword);
+
+app.get('/api/sync', passport.authenticate('bearer', {session: false}),
+                     authConfig.authorize(access.admin),
+                     syncService.startSync);
 
 app.get('/api/buses', busServiceCtrl.getBuses);
 

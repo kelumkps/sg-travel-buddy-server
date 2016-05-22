@@ -84,7 +84,7 @@ var busServiceFunc = function (callback) {
                         routes: bus.routes,
                         type: bus.type,
                         operator: bus.operator,
-                        name: bus.name,
+                        routeOneName: bus.name,
                         routeOneStops: bus.routeOneStops
                     });
                 } else {
@@ -93,7 +93,7 @@ var busServiceFunc = function (callback) {
                         routes: bus.routes,
                         type: bus.type,
                         operator: bus.operator,
-                        name: bus.name,
+                        routeOneName: bus.name,
                         routeOneStops: bus.routeOneStops,
                         routeTwoStops: bus.routeTwoStops
                     });

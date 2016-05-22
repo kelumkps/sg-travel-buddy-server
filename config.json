@@ -27,5 +27,13 @@
     "refreshToken": "#refresh-token#",
     "accessToken": "#access-token#",
     "timeout": 3600
+  },
+  "sgLtaDataMall": {
+    "uri": "http://datamall2.mytransport.sg/ltaodataservice",
+    "busServiceEndPoint": "/BusServices",
+    "busRoutesEndPoint": "/BusRoutes",
+    "busStopsEndPoint": "/BusStops",
+    "accountKey": "#accountKey#",
+    "uniqueUserId": "#uniqueUserId#"
   }
 }

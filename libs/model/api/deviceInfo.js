@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var DeviceInfo = new Schema({
     uuid: {type: String, unique: true, required: true},
-    serial: {type: String, unique: true, required: true},
+    serial: {type: String, required: true},
     platform: String,
     model: String,
     manufacturer: String,

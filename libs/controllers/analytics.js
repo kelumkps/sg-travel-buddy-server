@@ -5,20 +5,32 @@ var gaAccountId = config.get('analytics:gaAccountId');
 var serverUrl = config.get('analytics:serverUrl');
 
 var pageTitles = {
-    "/oauth2/token": "Auth Token",
-    "/oauth2/auth": "Auth",
-    "/oauth2/decision": "Auth Decision",
-    "/oauth2/exchange": "Token Exchange",
-    "/oauth2/revoke": "Token Revoke",
-    "/api/users": "New User",
-    "/api/buses": "List of Buses",
-    "/api/buses/": "Bus Service Info",
-    "/api/stops": "List of Bus Stops",
-    "/api/stops/": "Bus Stop",
-    "/api/routes": "New Route",
-    "/api/routes/": "Update Route",
-    "/api/deviceInfo": "Device Info",
-    "/api/userInfo": "User Info"
+    "GET": {
+        "/oauth2/auth": "Auth",
+        "/api/users": "Get User",
+        "/password_reset/": "Get Password Reset Form",
+        "/api/sync": "Trigger LTA Sync",
+        "/api/buses": "List of Buses",
+        "/api/buses/": "Bus Service Info",
+        "/api/stops": "List of Bus Stops",
+        "/api/stops/": "Bus Stop",
+        "/api/userInfo": "User Info"
+    },
+    "POST": {
+        "/oauth2/token": "Auth Token",
+        "/oauth2/decision": "Auth Decision",
+        "/oauth2/exchange": "Token Exchange",
+        "/oauth2/revoke": "Token Revoke",
+        "/api/users": "Create New User",
+        "/password_reset": "Request Reset Password",
+        "/password_reset/": "Update Password",
+        "/api/routes": "New Route",
+        "/api/deviceInfo": "Device Info"
+    },
+    "PUT": {
+        "/api/users": "Update User",
+        "/api/routes/": "Update Route"
+    }
 };
 
 module.exports = {
@@ -31,7 +43,7 @@ module.exports = {
             ds: "web",
             ul: req.headers["accept-language"]
         };
-        pageData['dt'] = getPageTitle(req.path);
+        pageData['dt'] = getPageTitle(req.method, req.path);
         var visitor;
         var deviceId = req.get('device-id');
         if (deviceId != undefined) {
@@ -59,13 +71,14 @@ module.exports = {
     }
 };
 
-function getPageTitle(path) {
-    var pageTitle = pageTitles[path];
+function getPageTitle(method, path) {
+    var titles = pageTitles[method] || {};
+    var pageTitle = titles[path];
     if (pageTitle != undefined) {
         return pageTitle;
     } else {
         var i = path.lastIndexOf("/") + 1;
         var updatedPath = path.substring(0, i);
-        return pageTitles[updatedPath];
+        return titles[updatedPath];
     }
 }

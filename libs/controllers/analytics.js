@@ -14,13 +14,13 @@ var pageTitles = {
         "/api/buses/": "Bus Service Info",
         "/api/stops": "List of Bus Stops",
         "/api/stops/": "Bus Stop",
-        "/api/userInfo": "User Info"
+        "/api/userInfo": "User Info",
+        "/oauth2/revoke": "Token Revoke"
     },
     "POST": {
         "/oauth2/token": "Auth Token",
         "/oauth2/decision": "Auth Decision",
         "/oauth2/exchange": "Token Exchange",
-        "/oauth2/revoke": "Token Revoke",
         "/api/users": "Create New User",
         "/password_reset": "Request Reset Password",
         "/password_reset/": "Update Password",

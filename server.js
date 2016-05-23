@@ -111,6 +111,10 @@ app.put('/api/routes/:id', routeHttpCtrl.updateRoute);
 
 app.post('/api/deviceInfo', deviceInfoCtrl.createOrUpdate);
 
+app.post('/api/appInfo', passport.authenticate('bearer', {session: false}),
+                        authConfig.authorize(access.admin),
+                        deviceInfoCtrl.createAppInfo);
+
 app.get('/api/userInfo',
     passport.authenticate('bearer', {
         session: false

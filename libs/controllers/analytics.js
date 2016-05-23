@@ -25,7 +25,8 @@ var pageTitles = {
         "/password_reset": "Request Reset Password",
         "/password_reset/": "Update Password",
         "/api/routes": "New Route",
-        "/api/deviceInfo": "Device Info"
+        "/api/deviceInfo": "Device Info",
+        "/api/appInfo": "Add New App URL"
     },
     "PUT": {
         "/api/users": "Update User",

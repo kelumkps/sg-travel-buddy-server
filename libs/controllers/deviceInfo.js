@@ -1,4 +1,5 @@
 var DeviceInfoModel = require('./../model/api/deviceInfo');
+var AppInfoModel = require('./../model/api/appInfo');
 
 var log = require('./../log')(module);
 
@@ -38,11 +39,34 @@ module.exports = {
                         });
                     }
                 }
-                return res.send(response);
-            })
+                AppInfoModel.findOne({isActive: true}, function (err, appInfo) {
+                    if (err) {
+                        log.error("Error while loading AppInfo", err);
+                    } else if (appInfo) {
+                        response['appUrl'] = appInfo.appUrl || "";
+                    }
+                    return res.send(response);
+                });
+            });
         } else {
             res.send(400, {error: "Bad Request", message: "Missing uuid or serial number"});
         }
+    },
+    createAppInfo: function (req, res) {
+        var appUrl = req.body.appUrl;
+        log.info('Create a new AppInfo with URL ', appUrl);
+        if (appUrl == undefined || appUrl === "") return res.status(400).send({error: "Bad Request", message: "Missing appUrl parameter"});
+
+        AppInfoModel.update({ isActive: true }, { isActive: false }, { multi: true }, function (err, raw) {
+            if (err) return sendServerErrorResponse(res, err);
+            var appInfo = new AppInfoModel({
+                appUrl: appUrl
+            });
+            appInfo.save(function (err, info) {
+                if (err) return sendServerErrorResponse(res, err);
+                return res.status(200).send(info);
+            });
+        });
     }
 };
 

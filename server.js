@@ -29,8 +29,8 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
 
-var serverPort = process.env.OPENSHIFT_NODEJS_PORT || config.get('port');
-var serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var serverPort = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || config.get('port');
+var serverIpAddress = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 // Socket.io Communication
 io.sockets.on('connection', require('./libs/controllers/socket'));

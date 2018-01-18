@@ -48,11 +48,11 @@ app.use(sass({
 app.use(morgan(config.get('logger:format'))); // log every request to the console
 app.use(bodyParser.urlencoded({
     extended: false
-})); // parse application/x-www-form-urlencoded  
-app.use(bodyParser.json()); // parse application/json 
+})); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
 app.use(methodOverride()); // simulate DELETE and PUT
 app.use(require('express-flash')());
-app.use(session({secret: 'SECRET'})); // session secret
+app.use(session({secret: 'SECRET', resave: true, saveUninitialized: true})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(express.static(path.join(publicDir, "public"))); // starting static file server, that will watch `public` folder (in our case there will be `index.html`)
@@ -153,4 +153,3 @@ server.listen(serverPort, serverIpAddress, function () {
     log.info('%s: SGTravelBuddy server started on %s:%d ...',
         Date(Date.now()), serverIpAddress, serverPort);
 });
-
